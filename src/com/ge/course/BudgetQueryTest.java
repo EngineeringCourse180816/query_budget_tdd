@@ -115,6 +115,19 @@ public class BudgetQueryTest {
         assertEquals(7 + 10, actual);
     }
 
+    @Test
+    public void budget_amount_is_more_than_1() {
+        givenBudgets(
+                budget(2018, 8, 620),
+                budget(2018, 9, 30));
+
+        long actual = budgetQuery.query(
+                of(2018, 8, 25),
+                of(2018, 9, 10));
+
+        assertEquals(20 * 7 + 10, actual);
+    }
+
     private Budget budget(int year, int month, int amount) {
         return new Budget(of(year, month, 1), amount);
     }

@@ -11,11 +11,9 @@ public class BudgetQuery {
     }
 
     public long query(LocalDate start, LocalDate end) {
-        int sum = 0;
-        for (Budget budget : budgetDao.findAll()) {
-            sum += 1 * new Period(start, end).getOverlappingDayCount(budget.getPeriod());
-        }
-        return sum;
+        return budgetDao.findAll().stream()
+                .mapToInt(budget -> (int) budget.getOverlappingAmount(new Period(start, end)))
+                .sum();
     }
 
 }
