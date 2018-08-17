@@ -11,11 +11,11 @@ public class BudgetQuery {
     }
 
     public long query(LocalDate start, LocalDate end) {
-        if (budgetDao.findAll().isEmpty())
-            return 0;
-
-        Budget budget = budgetDao.findAll().get(0);
-        return 1 * new Period(start, end).getOverlappingDayCount(budget.getPeriod());
+        int sum = 0;
+        for (Budget budget : budgetDao.findAll()) {
+            sum += 1 * new Period(start, end).getOverlappingDayCount(budget.getPeriod());
+        }
+        return sum;
     }
 
 }
