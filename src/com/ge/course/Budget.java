@@ -18,4 +18,8 @@ public class Budget {
     public LocalDate getEnd() {
         return date.withDayOfMonth(date.lengthOfMonth());
     }
+
+    public Period getPeriod() {
+        return new Period(getStart(), getEnd());
+    }
 }

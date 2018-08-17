@@ -80,6 +80,17 @@ public class BudgetQueryTest {
         assertEquals(0, actual);
     }
 
+    @Test
+    public void start_is_after_budget_end() {
+        givenBudgets(budget(2018, 8, 31));
+
+        long actual = budgetQuery.query(
+                of(2018, 9, 25),
+                of(2018, 9, 29));
+
+        assertEquals(0, actual);
+    }
+
     private Budget budget(int year, int month, int amount) {
         return new Budget(of(year, month, 1), amount);
     }
